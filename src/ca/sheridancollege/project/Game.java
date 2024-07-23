@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Abstract class representing a generic game.
+ * Author: Dhruv
+ */
 public abstract class Game {
-    private final String name;
-    private ArrayList<Player> players;
+    private final String name; // Name of the game
+    private ArrayList<Player> players; // List of players in the game
 
     public Game(String name) {
         this.name = name;
@@ -25,14 +29,17 @@ public abstract class Game {
         this.players = players;
     }
 
-    public abstract void play();
+    public abstract void play(); // Abstract method to play the game
 
-    public abstract void declareWinner();
+    public abstract void declareWinner(); // Abstract method to declare the winner
 }
 
+/**
+ * Class representing the War card game.
+ */
 class WarGame extends Game {
-    private int currentRound;
-    private Map<PlayingCard, Player> cardPlayerMap;
+    private int currentRound; // Current round number
+    private Map<PlayingCard, Player> cardPlayerMap; // Map to track which player played which card
 
     public WarGame(String name) {
         super(name);
@@ -42,6 +49,7 @@ class WarGame extends Game {
 
     @Override
     public void play() {
+        // Play rounds until the maximum number of rounds is reached or the game is over
         while (currentRound <= 4 && !isGameOver()) {
             System.out.println("Round " + currentRound);
             playRound();
@@ -55,6 +63,7 @@ class WarGame extends Game {
         ArrayList<Player> roundWinners = new ArrayList<>();
         cardPlayerMap.clear(); // Clear the map for each round
 
+        // Each player plays a card
         for (Player player : getPlayers()) {
             PlayingCard card = (PlayingCard) player.playCard();
             if (card != null) {
@@ -66,6 +75,7 @@ class WarGame extends Game {
             }
         }
 
+        // Determine the highest card played
         PlayingCard highestCard = null;
         for (Card card : cardsInMiddle) {
             if (highestCard == null || ((PlayingCard) card).getRankValue() > highestCard.getRankValue()) {
@@ -77,6 +87,7 @@ class WarGame extends Game {
             }
         }
 
+        // Resolve ties by going to war
         if (roundWinners.size() > 1) {
             resolveWar(roundWinners, cardsInMiddle);
         } else {
@@ -99,6 +110,7 @@ class WarGame extends Game {
         PlayingCard highestWarCard = null;
         Player warWinner = null;
 
+        // Each tied player plays cards for the war
         for (Player player : tiedPlayers) {
             if (player.getHandSize() >= 5) {
                 ArrayList<Card> playerWarCards = player.playWarCards();
@@ -115,6 +127,7 @@ class WarGame extends Game {
             }
         }
 
+        // Determine the winner of the war and collect all the cards
         if (warWinner != null) {
             warWinner.collectCards(cardsInMiddle);
             warWinner.collectCards(warCards);
@@ -133,6 +146,7 @@ class WarGame extends Game {
         Player winner = null;
         int highestScore = 0;
 
+        // Determine the player with the highest score
         for (Player player : getPlayers()) {
             int score = player.getHandSize();
             if (score > highestScore) {
@@ -149,6 +163,7 @@ class WarGame extends Game {
     }
 
     private boolean isGameOver() {
+        // Check if any player has no cards left
         for (Player player : getPlayers()) {
             if (player.getHandSize() == 0) {
                 return true;
