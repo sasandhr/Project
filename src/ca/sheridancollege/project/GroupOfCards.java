@@ -8,6 +8,8 @@ import java.util.Collections;
  * including shuffling, adding, and drawing cards.
  * 
  * Author: Dev
+ * Following SRP: This class only manages the collection of cards
+ * Following OCP: Can extend this class to add more functionalities without modifying the existing code
  */
 public class GroupOfCards {
     private ArrayList<Card> cards;

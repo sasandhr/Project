@@ -8,6 +8,8 @@ import java.util.Scanner;
  * 
  * This is the main class for the War Card Game. It initializes the game,
  * creates players, and sets up the deck of cards.
+ * 
+ * Following SRP: This class only initializes and runs the game
  */
 public class Main {
     public static void main(String[] args) {
@@ -55,3 +57,4 @@ public class Main {
         warGame.play();
     }
 }
+

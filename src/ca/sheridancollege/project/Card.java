@@ -2,9 +2,8 @@ package ca.sheridancollege.project;
 
 // Abstract class representing a card
 // Author: Vraj
-
+// Following SRP: This class only defines the structure of a Card
 public abstract class Card {
-    // Abstract method to be implemented by subclasses
     @Override
     public abstract String toString();
 }
@@ -20,12 +19,10 @@ enum Rank {
 
     private final int value;
 
-    // Constructor for Rank enum
     Rank(int value) {
         this.value = value;
     }
 
-    // Method to retrieve the integer value of the rank
     public int getValue() {
         return value;
     }
@@ -61,5 +58,5 @@ class PlayingCard extends Card {
     @Override
     public String toString() {
         return rank + " of " + suit;
-   }
+    }
 }

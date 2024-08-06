@@ -7,6 +7,7 @@ import java.util.Map;
 /**
  * Abstract class representing a generic game.
  * Author: Dhruv
+ * Following SRP: This class only defines the structure and basic behavior of a Game
  */
 public abstract class Game {
     private final String name; // Name of the game
@@ -36,6 +37,7 @@ public abstract class Game {
 
 /**
  * Class representing the War card game.
+ * Following OCP: This class extends Game and implements the specific logic for the War game without modifying the Game class
  */
 class WarGame extends Game {
     private int currentRound; // Current round number

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 /**
  * Represents a player in the card game.
  * Author: Nakul
+ * Following SRP: This class only defines the structure and basic behavior of a Player
  */
 public abstract class Player {
     private String name;
@@ -101,6 +102,7 @@ public abstract class Player {
 
 /**
  * Represents a player specifically for the game War.
+ * Following LSP: This class extends Player and can be used interchangeably with Player in the game
  */
 class WarPlayer extends Player {
     /**
